@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Ok Movie</string>
+    <string name="title_feed">главная</string>
+    <string name="title_like">избранное</string>
+    <string name="title_settings">настройки</string>
+    <string name="feed_trend">В тренде</string>
+    <string name="new_products">Новинки</string>
+    <string name="genres">Жанры</string>
+    <string name="serials">Сериалы</string>
 </resources>

@@ -1,8 +1,28 @@
 package com.vladbstrv.okmovie.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Movie(
-    val id: Long,
-    val poster: String,
-    val title: String,
-    val genre: String
-)
+    val id: Long = 1,
+    val poster: String = "",
+    val title: String = "Название",
+    val genre: String = "Жанр"
+) : Parcelable
+
+fun getMovie() : List<Movie> {
+    return listOf(
+    Movie(1, "", "Зеленая миля", "драма, криминал"),
+    Movie(2, "", "Побег из Шоушенка", "драма"),
+    Movie(3, "", "Властелин колец: Возвращение короля", "фэнтези, приключения, драма"),
+    Movie(4, "", "Властелин колец: Две крепости", "фэнтези, приключения, драма"),
+    Movie(5, "", "Властелин колец: Братство Кольца", "фэнтези, приключения, драма"),
+    Movie(6, "", "Форрест Гамп", "драма, комедия, мелодрама, история, военный"),
+    Movie(7, "", "Список Шиндлера", "драма, биография, история, военный"),
+    Movie(8, "", "1+1", "драма, комедия, биография"),
+    Movie(9, "", "Король Лев", "мультфильм, мюзикл, драма, приключения, семейный"),
+    Movie(10, "", "Интерстеллар", "фантастика, драма, приключения")
+    )
+}
+

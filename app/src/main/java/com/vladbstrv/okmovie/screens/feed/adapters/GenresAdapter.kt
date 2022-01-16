@@ -7,13 +7,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.vladbstrv.okmovie.R
+import com.vladbstrv.okmovie.model.Genre
 import com.vladbstrv.okmovie.model.Movie
 
 class GenresAdapter : RecyclerView.Adapter<GenresAdapter.ViewHolder>() {
 
-    private val mMovieList: MutableList<String> = ArrayList()
+    private val mMovieList: MutableList<Genre> = ArrayList()
 
-    fun setData(newMovie: List<String>) {
+    fun setData(newMovie: List<Genre>) {
         mMovieList.clear()
         mMovieList.addAll(newMovie)
 
@@ -37,8 +38,8 @@ class GenresAdapter : RecyclerView.Adapter<GenresAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val genreItem: TextView = itemView.findViewById(R.id.itemGenres)
 
-        fun bind(model: String) {
-            genreItem.text = model
+        fun bind(model: Genre) {
+            genreItem.text = model.name
         }
     }
 }

@@ -3,58 +3,40 @@ package com.vladbstrv.okmovie.screens.feed
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.vladbstrv.okmovie.model.Genre
 import com.vladbstrv.okmovie.model.Movie
+import com.vladbstrv.okmovie.model.getGenre
+import com.vladbstrv.okmovie.model.repository.Repository
+import com.vladbstrv.okmovie.model.repository.RepositoryImpl
+import com.vladbstrv.okmovie.screens.AppState
+import java.lang.Thread.sleep
 
 class FeedViewModel : ViewModel() {
 
-    private val _trendsMovie = MutableLiveData<List<Movie>>()
-    val trendsMovie: LiveData<List<Movie>> = _trendsMovie
+    private val _trendsMovie = MutableLiveData<AppState>()
+    val trendsMovie: LiveData<AppState> = _trendsMovie
 
-    private val _genre = MutableLiveData<List<String>>()
-    val genre: LiveData<List<String>> = _genre
+    private val _genre = MutableLiveData<List<Genre>>()
+    val genre: LiveData<List<Genre>> = _genre
+
+    private val repository: Repository = RepositoryImpl()
 
     init {
         loadMovie()
         loadGenre()
     }
 
+    fun getMovieFromLocalStorage() = loadMovie()
+
     private fun loadGenre() {
-        val list = mutableListOf<String>()
-        list.add("Семейные")
-        list.add("Комедии")
-        list.add("Фэнтези")
-        list.add("Триллеры")
-        list.add("Драммы")
-        list.add("Приключения")
-        list.add("Документальные")
-        list.add("Ужасы")
-        list.add("Фантастика")
-        list.add("Аниме")
-        list.add("Короткометражки")
-        list.add("Боевики")
-        list.add("Мелодрамы")
-        list.add("Биографии")
-        list.add("Детективы")
-        list.add("Авторское кино")
-        list.add("Криминальные")
-        list.add("Мультфильмы")
-        list.add("Истоические")
-        _genre.value = list
+        _genre.value = getGenre()
     }
 
     private fun loadMovie() {
-        val list = mutableListOf<Movie>()
-        list.add(Movie(1, "", "название", "жанр"))
-        list.add(Movie(2, "", "название", "жанр"))
-        list.add(Movie(3, "", "название", "жанр"))
-        list.add(Movie(4, "", "название", "жанр"))
-        list.add(Movie(5, "", "название", "жанр"))
-        list.add(Movie(6, "", "название", "жанр"))
-        list.add(Movie(7, "", "название", "жанр"))
-        list.add(Movie(8, "", "название", "жанр"))
-        list.add(Movie(9, "", "название", "жанр"))
-        list.add(Movie(10, "", "название", "жанр"))
-
-        _trendsMovie.value = list
+        _trendsMovie.value = AppState.Loading
+        Thread {
+            sleep(2000)
+            _trendsMovie.postValue(AppState.Success(repository.getMovieFromLocalStorage()))
+        }.start()
     }
 }

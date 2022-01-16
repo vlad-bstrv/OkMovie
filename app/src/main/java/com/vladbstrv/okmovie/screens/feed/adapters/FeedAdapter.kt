@@ -8,8 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.vladbstrv.okmovie.R
 import com.vladbstrv.okmovie.model.Movie
+import com.vladbstrv.okmovie.screens.feed.FeedFragment
 
-class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
+class FeedAdapter(
+    private val onItemViewClickListener:
+            FeedFragment.OnItemViewClickListener
+) : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
 
     private val mMovieList: MutableList<Movie> = ArrayList()
 
@@ -19,6 +23,10 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
 
         notifyDataSetChanged()
     }
+
+//    fun removeListener() {
+//        onItemViewClickListener = null
+//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -34,7 +42,7 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
         return mMovieList.count()
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imgPoster: ImageView = itemView.findViewById(R.id.imgPosterItem)
         private val titleItem: TextView = itemView.findViewById(R.id.titleItem)
         private val genreItem: TextView = itemView.findViewById(R.id.genreItem)
@@ -43,6 +51,9 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
 //            imgPoster.setImageResource(model.poster)
             titleItem.text = model.title
             genreItem.text = model.genre
+            itemView.setOnClickListener {
+                onItemViewClickListener.OnItemViewClick(model)
+            }
         }
     }
 }

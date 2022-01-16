@@ -7,4 +7,6 @@
     <string name="new_products">Новинки</string>
     <string name="genres">Жанры</string>
     <string name="serials">Сериалы</string>
+    <string name="error">Ошибка</string>
+    <string name="reload">Загрузить</string>
 </resources>

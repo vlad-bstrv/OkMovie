@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.vladbstrv.okmovie.R
 import com.vladbstrv.okmovie.databinding.FragmentDetailBinding
+import com.vladbstrv.okmovie.model.Movie
 
 class DetailFragment : Fragment() {
 
@@ -20,5 +21,16 @@ class DetailFragment : Fragment() {
     ): View? {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
         return mBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val movie = arguments?.getParcelable<Movie>(movieKey)
+        mBinding.title.text = movie?.title
+        mBinding.genre.text = movie?.genre
+    }
+
+    companion object {
+        const val movieKey = "movieKey"
     }
 }

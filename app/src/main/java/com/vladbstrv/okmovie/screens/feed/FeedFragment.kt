@@ -65,10 +65,13 @@ class FeedFragment : Fragment() {
             adapterGenres.setData(it)
         })
 
-        mBinding.recyclerViewTrend.adapter = adapter
-        mBinding.recyclerViewNewProducts.adapter = adapter
-        mBinding.recyclerViewTopSerials.adapter = adapter
-        mBinding.recyclerViewGenres.adapter = adapterGenres
+        mBinding.apply {
+            recyclerViewTrend.adapter = adapter
+            recyclerViewNewProducts.adapter = adapter
+            recyclerViewTopSerials.adapter = adapter
+            recyclerViewGenres.adapter = adapterGenres
+        }
+
 
     }
 

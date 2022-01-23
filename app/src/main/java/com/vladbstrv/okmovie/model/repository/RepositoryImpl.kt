@@ -4,11 +4,7 @@ import com.vladbstrv.okmovie.model.Movie
 import com.vladbstrv.okmovie.model.getMovie
 
 class RepositoryImpl : Repository {
-    override fun getMovieFromServer(): Movie {
-        return Movie()
-    }
+    override fun getMovieFromServer() = Movie()
 
-    override fun getMovieFromLocalStorage(): List<Movie> {
-        return getMovie()
-    }
+    override fun getMovieFromLocalStorage() = getMovie()
 }

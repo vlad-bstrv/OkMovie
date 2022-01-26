@@ -10,7 +10,7 @@ data class Movie(
     val id: Int = 1,
     val poster: String = "",
     val title: String = "Название",
-//    val genre: @RawValue List<Genres> = listOf(),
+//    val genre: List<Genres> = listOf(),
     val description: String = "Описание"
 ) : Parcelable
 

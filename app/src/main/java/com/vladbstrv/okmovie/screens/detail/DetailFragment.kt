@@ -30,24 +30,21 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val movie = arguments?.getParcelable<Movie>(movieKey)
+        val movieId = arguments?.getInt(movieKey)
 
-        if (movie != null) {
-            viewModel.loadData(movie.id)
-            Log.e("AAA", movie.id.toString())
+        if (movieId != null) {
+            viewModel.loadData(movieId)
         }
 
 
         viewModel.movieLiveData.observe(viewLifecycleOwner, {
-            when(it) {
+            when (it) {
                 is AppState.Success -> {
                     mBinding.title.text = it.movieData[0].title
                     mBinding.description.text = it.movieData[0].description
                 }
             }
-        }
-
-            )
+        })
     }
 
     companion object {

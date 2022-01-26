@@ -6,4 +6,5 @@ interface Repository {
 
     fun getMovieFromServer(id: Int): Movie
     fun getMovieFromLocalStorage(): List<Movie>
+    fun getMovieTrendsFromServer(): List<Movie>
 }

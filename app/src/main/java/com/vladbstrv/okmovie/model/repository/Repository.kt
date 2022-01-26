@@ -4,6 +4,6 @@ import com.vladbstrv.okmovie.model.Movie
 
 interface Repository {
 
-    fun getMovieFromServer(): Movie
+    fun getMovieFromServer(id: Int): Movie
     fun getMovieFromLocalStorage(): List<Movie>
 }

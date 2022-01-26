@@ -50,7 +50,7 @@ class FeedAdapter(
         fun bind(model: Movie) {
 //            imgPoster.setImageResource(model.poster)
             titleItem.text = model.title
-            genreItem.text = model.genre
+//            genreItem.text = model.genre[0].name
             itemView.setOnClickListener {
                 onItemViewClickListener.OnItemViewClick(model)
             }

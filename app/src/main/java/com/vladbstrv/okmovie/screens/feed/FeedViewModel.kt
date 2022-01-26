@@ -35,7 +35,7 @@ class FeedViewModel : ViewModel() {
     private fun loadMovie() {
         _trendsMovie.value = AppState.Loading
         Thread {
-            sleep(2000)
+//            sleep(2000)
             _trendsMovie.postValue(AppState.Success(repository.getMovieFromLocalStorage()))
         }.start()
     }

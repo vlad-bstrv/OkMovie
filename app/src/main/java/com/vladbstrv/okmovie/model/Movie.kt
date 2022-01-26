@@ -1,28 +1,31 @@
 package com.vladbstrv.okmovie.model
 
 import android.os.Parcelable
+import com.vladbstrv.okmovie.model.entities.rest_entities.Genres
 import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
 @Parcelize
 data class Movie(
-    val id: Long = 1,
+    val id: Int = 1,
     val poster: String = "",
     val title: String = "Название",
-    val genre: String = "Жанр"
+//    val genre: @RawValue List<Genres> = listOf(),
+    val description: String = "Описание"
 ) : Parcelable
 
 fun getMovie() : List<Movie> {
     return listOf(
-    Movie(1, "", "Зеленая миля", "драма, криминал"),
-    Movie(2, "", "Побег из Шоушенка", "драма"),
-    Movie(3, "", "Властелин колец: Возвращение короля", "фэнтези, приключения, драма"),
-    Movie(4, "", "Властелин колец: Две крепости", "фэнтези, приключения, драма"),
-    Movie(5, "", "Властелин колец: Братство Кольца", "фэнтези, приключения, драма"),
-    Movie(6, "", "Форрест Гамп", "драма, комедия, мелодрама, история, военный"),
-    Movie(7, "", "Список Шиндлера", "драма, биография, история, военный"),
-    Movie(8, "", "1+1", "драма, комедия, биография"),
-    Movie(9, "", "Король Лев", "мультфильм, мюзикл, драма, приключения, семейный"),
-    Movie(10, "", "Интерстеллар", "фантастика, драма, приключения")
+    Movie(336, "", "Зеленая миля"),
+    Movie(337, "", "Побег из Шоушенка"),
+    Movie(338, "", "Властелин колец: Возвращение короля"),
+    Movie(339, "", "Властелин колец: Две крепости"),
+    Movie(340, "", "Властелин колец: Братство Кольца"),
+    Movie(336, "", "Форрест Гамп"),
+    Movie(336, "", "Список Шиндлера"),
+    Movie(336, "", "1+1"),
+    Movie(336, "", "Король Лев"),
+    Movie(336, "", "Интерстеллар")
     )
 }
 

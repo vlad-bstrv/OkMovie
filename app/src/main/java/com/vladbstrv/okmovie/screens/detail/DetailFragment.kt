@@ -1,18 +1,23 @@
 package com.vladbstrv.okmovie.screens.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.vladbstrv.okmovie.R
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.vladbstrv.okmovie.screens.AppState
+
 import com.vladbstrv.okmovie.databinding.FragmentDetailBinding
 import com.vladbstrv.okmovie.model.Movie
+import kotlinx.android.synthetic.main.fragment_detail.*
 
 class DetailFragment : Fragment() {
 
     private var _binding: FragmentDetailBinding? = null
     private val mBinding get() = _binding!!
+    private val viewModel: DetailViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,8 +31,23 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val movie = arguments?.getParcelable<Movie>(movieKey)
-        mBinding.title.text = movie?.title
-        mBinding.genre.text = movie?.genre
+
+        if (movie != null) {
+            viewModel.loadData(movie.id)
+            Log.e("AAA", movie.id.toString())
+        }
+
+
+        viewModel.movieLiveData.observe(viewLifecycleOwner, {
+            when(it) {
+                is AppState.Success -> {
+                    mBinding.title.text = it.movieData[0].title
+                    mBinding.description.text = it.movieData[0].description
+                }
+            }
+        }
+
+            )
     }
 
     companion object {

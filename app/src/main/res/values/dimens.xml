@@ -4,4 +4,8 @@
     <dimen name="card_corner_radius_item_genres">8dp</dimen>
     <dimen name="item_feeds_text_size_title">12sp</dimen>
     <dimen name="item_feeds_text_size_genre">10sp</dimen>
+    <dimen name="margin_15_dp">15dp</dimen>
+    <dimen name="feels_like_text_size">16sp</dimen>
+    <dimen name="margin_5_dp">5dp</dimen>
+    <dimen name="main_container_text_size">12sp</dimen>
 </resources>

@@ -1,4 +1,4 @@
-package com.vladbstrv.okmovie.model.entities.rest_entities
+package com.vladbstrv.okmovie.model.data.entities.rest_entities
 
 import com.google.gson.annotations.SerializedName
 

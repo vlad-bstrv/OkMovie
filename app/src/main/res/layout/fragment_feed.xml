@@ -2,9 +2,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/feedFragmentFrameLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/feedFragmentFrameLayout">
+    android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -85,9 +85,9 @@
     </androidx.core.widget.NestedScrollView>
 
     <FrameLayout
+        android:id="@+id/loadingLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/loadingLayout"
         android:background="@color/white"
         android:visibility="gone"
         tools:visibility="visible">
@@ -97,6 +97,4 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
     </FrameLayout>
-
-
 </FrameLayout>

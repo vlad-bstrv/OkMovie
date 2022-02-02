@@ -1,10 +1,9 @@
 package com.vladbstrv.okmovie.model
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import com.google.gson.Gson
-import com.vladbstrv.okmovie.model.entities.rest_entities.MovieTrendsDTO
+import com.vladbstrv.okmovie.model.data.entities.rest_entities.MovieListDTO
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.lang.Exception
@@ -12,17 +11,10 @@ import java.net.MalformedURLException
 import java.net.URL
 import java.util.stream.Collectors
 import javax.net.ssl.HttpsURLConnection
-import com.google.gson.reflect.TypeToken
-
-import com.google.gson.JsonArray
-
-import com.google.gson.JsonObject
-
-
 
 
 object MovieTrendsLoader {
-    fun loadMovie(): MovieTrendsDTO? {
+    fun loadMovie(): MovieListDTO? {
         try {
             val uri = URL("https://api.kinopoisk.dev/movie?field=rating.kp&search=8-10&field=year&search=2021&sortField=year&sortType=1&token=0TTB526-VYFM09X-Q70RE5V-Y2B1YEC")
             lateinit var urlConnection: HttpsURLConnection
@@ -36,7 +28,7 @@ object MovieTrendsLoader {
                 } else {
                     getLines(bufferedReader)
                 }
-                return Gson().fromJson(lines, MovieTrendsDTO::class.java)
+                return Gson().fromJson(lines, MovieListDTO::class.java)
             } catch (e: Exception) {
                 e.printStackTrace()
             } finally {

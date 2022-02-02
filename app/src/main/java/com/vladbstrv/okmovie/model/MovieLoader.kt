@@ -3,7 +3,7 @@ package com.vladbstrv.okmovie.model
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.google.gson.Gson
-import com.vladbstrv.okmovie.model.entities.rest_entities.MovieDTO
+import com.vladbstrv.okmovie.model.data.entities.rest_entities.MovieDTO
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.lang.Exception

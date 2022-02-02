@@ -3,8 +3,8 @@ package com.vladbstrv.okmovie.model.repository
 import com.vladbstrv.okmovie.model.Movie
 import com.vladbstrv.okmovie.model.MovieLoader
 import com.vladbstrv.okmovie.model.MovieTrendsLoader
-import com.vladbstrv.okmovie.model.entities.rest_entities.Genres
-import com.vladbstrv.okmovie.model.getMovie
+import com.vladbstrv.okmovie.model.data.entities.rest_entities.Genres
+
 
 class RepositoryImpl : Repository {
     override fun getMovieFromServer(id: Int): Movie {
@@ -20,7 +20,7 @@ class RepositoryImpl : Repository {
 
 
     override fun getMovieFromLocalStorage(): List<Movie> {
-        return getMovie()
+        return listOf()
     }
 
     override fun getMovieTrendsFromServer(): List<Movie> {

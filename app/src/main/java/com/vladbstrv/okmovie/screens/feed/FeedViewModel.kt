@@ -28,6 +28,9 @@ class FeedViewModel : ViewModel() {
     private val localLiveDataMovieSerials: MutableLiveData<MovieListDTO> = MutableLiveData()
     val movieLiveDataMovieSerials: LiveData<MovieListDTO> = localLiveDataMovieSerials
 
+    private val localLiveDataMovieCartoon: MutableLiveData<MovieListDTO> = MutableLiveData()
+    val movieLiveDataMovieCartoon: LiveData<MovieListDTO> = localLiveDataMovieCartoon
+
     private val compositeDisposable = CompositeDisposable()
 
     override fun onCleared() {
@@ -45,45 +48,63 @@ class FeedViewModel : ViewModel() {
 
     fun fetchMovieList(movieApi: MovieApi?) {
         movieApi?.let {
-            compositeDisposable.add(movieApi.getMovieList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    localLiveDataMovie.postValue(it)
-                }, {
+            compositeDisposable.add(
+                movieApi.getMovieList()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        localLiveDataMovie.postValue(it)
+                    }, {
 
-                })
+                    })
             )
         }
     }
 
     fun fetchMovieListNews(movieApi: MovieApi?) {
         movieApi?.let {
-            compositeDisposable.add(movieApi.getMovieList(
-                searchRating = "2-10",
-                searchYear = "2022"
-            )
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    localLiveDataMovieNews.postValue(it)
-                }, {
+            compositeDisposable.add(
+                movieApi.getMovieList(
+                    searchRating = "2-10",
+                    searchYear = "2022"
+                )
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        localLiveDataMovieNews.postValue(it)
+                    }, {
 
-                })
+                    })
             )
         }
     }
 
     fun fetchMovieListSerials(movieApi: MovieApi?) {
         movieApi?.let {
-            compositeDisposable.add(movieApi.getMovieList(searchTypeNumber = "2")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    localLiveDataMovieSerials.postValue(it)
-                }, {
+            compositeDisposable.add(
+                movieApi.getMovieList(searchTypeNumber = "2")
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        localLiveDataMovieSerials.postValue(it)
+                    }, {
 
-                })
+                    })
+            )
+        }
+    }
+
+    fun fetchMovieListCartoon(movieApi: MovieApi?) {
+        movieApi?.let {
+            compositeDisposable.add(
+                movieApi.getMovieList(searchTypeNumber = "3")
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        localLiveDataMovieCartoon.postValue(it)
+                    }, {
+
+                    })
             )
         }
     }

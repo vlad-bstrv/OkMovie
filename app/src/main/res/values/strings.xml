@@ -27,4 +27,6 @@
     <string name="rating_imdb">рейтинг IMDB</string>
     <string name="rating_kp">рейтинг КП</string>
     <string name="actors">Актеры</string>
+    <string name="adult_content">Мультфильмы на главной странице</string>
+    <string name="cartoons">Мультфильмы</string>
 </resources>

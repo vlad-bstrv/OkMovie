@@ -6,27 +6,24 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.vladbstrv.okmovie.R
-import com.vladbstrv.okmovie.model.Movie
+import com.vladbstrv.okmovie.model.data.entities.rest_entities.Docs
 import com.vladbstrv.okmovie.screens.feed.FeedFragment
 
 class FeedAdapter(
     private val onItemViewClickListener:
-            FeedFragment.OnItemViewClickListener
+    FeedFragment.OnItemViewClickListener
 ) : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
 
-    private val mMovieList: MutableList<Movie> = ArrayList()
+    private val mMovieList: MutableList<Docs> = ArrayList()
 
-    fun setData(newMovie: List<Movie>) {
+    fun setData(newMovie: List<Docs>) {
         mMovieList.clear()
         mMovieList.addAll(newMovie)
 
         notifyDataSetChanged()
     }
-
-//    fun removeListener() {
-//        onItemViewClickListener = null
-//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -45,12 +42,16 @@ class FeedAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imgPoster: ImageView = itemView.findViewById(R.id.imgPosterItem)
         private val titleItem: TextView = itemView.findViewById(R.id.titleItem)
-        private val genreItem: TextView = itemView.findViewById(R.id.genreItem)
+        private val ratingKpItem: TextView = itemView.findViewById(R.id.rating_KP)
+        private val ratingImdbItem: TextView = itemView.findViewById(R.id.rating_IMDB)
 
-        fun bind(model: Movie) {
-//            imgPoster.setImageResource(model.poster)
-            titleItem.text = model.title
-//            genreItem.text = model.genre[0].name
+        fun bind(model: Docs) {
+            titleItem.text = model.name
+            ratingKpItem.text = model.rating.kp.toString()
+            ratingImdbItem.text = model.rating.imdb.toString()
+
+            Glide.with(itemView).load(model.poster.previewUrl).into(imgPoster)
+
             itemView.setOnClickListener {
                 onItemViewClickListener.OnItemViewClick(model)
             }

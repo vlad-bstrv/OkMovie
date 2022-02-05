@@ -25,9 +25,13 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
 
     val context = application
 
-    fun initDatabase() {
+    fun initDatabase(id: Int) {
         val daoNote = NoteDatabase.getInstance(context).getNoteDao()
-        REPOSITORY = NoteRepositoryImpl(daoNote)
+        REPOSITORY = NoteRepositoryImpl(daoNote, id)
+    }
+
+    fun getNotesToId(): LiveData<List<NoteModel>> {
+        return REPOSITORY.notesByIdToServer
     }
 
     fun getAllNotes(): LiveData<List<NoteModel>> {
@@ -47,6 +51,7 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
                 onSuccess()
             }
         }
+
 
     private val compositeDisposable = CompositeDisposable()
 

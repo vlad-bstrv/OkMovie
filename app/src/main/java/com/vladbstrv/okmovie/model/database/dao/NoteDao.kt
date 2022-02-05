@@ -15,4 +15,7 @@ interface NoteDao {
 
     @Query("SELECT * FROM note_table")
     fun getAllNotes(): LiveData<List<NoteModel>>
+
+    @Query("SELECT * FROM note_table WHERE idToServer = :id")
+    fun getNotesToId(id: Int): LiveData<List<NoteModel>>
 }

@@ -72,7 +72,7 @@ class DetailFragment : Fragment() {
     }
 
     private fun initNote(movieId: Int) {
-        viewModel.initDatabase()
+        viewModel.initDatabase(movieId)
         recyclerViewNote = mBinding.recyclerViewNote
         mAdapterNote = NoteAdapter(object : OnItemViewClickListener {
             override fun OnItemViewClick(noteModel: NoteModel) {
@@ -80,7 +80,7 @@ class DetailFragment : Fragment() {
             }
         })
         recyclerViewNote.adapter = mAdapterNote
-        viewModel.getAllNotes().observe(viewLifecycleOwner){listNotes ->
+        viewModel.getNotesToId().observe(viewLifecycleOwner){listNotes ->
             mAdapterNote.setData(listNotes.asReversed())
         }
         mBinding.btnAddNote.setOnClickListener {

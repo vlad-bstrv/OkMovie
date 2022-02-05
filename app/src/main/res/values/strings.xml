@@ -29,4 +29,6 @@
     <string name="actors">Актеры</string>
     <string name="adult_content">Мультфильмы на главной странице</string>
     <string name="cartoons">Мультфильмы</string>
+    <string name="note">Заметка</string>
+    <string name="add">add</string>
 </resources>

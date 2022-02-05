@@ -8,4 +8,7 @@
     <dimen name="feels_like_text_size">16sp</dimen>
     <dimen name="margin_5_dp">5dp</dimen>
     <dimen name="main_container_text_size">12sp</dimen>
+    <dimen name="card_corner_radius_note">4dp</dimen>
+    <dimen name="layout_margin_note">4dp</dimen>
+    <dimen name="card_elevation_note">4dp</dimen>
 </resources>

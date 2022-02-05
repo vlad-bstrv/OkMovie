@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,6 +14,7 @@ import com.vladbstrv.okmovie.OkMovieApp
 import com.vladbstrv.okmovie.R
 import com.vladbstrv.okmovie.databinding.FragmentFeedBinding
 import com.vladbstrv.okmovie.model.data.entities.rest_entities.Docs
+import com.vladbstrv.okmovie.model.AppState
 import com.vladbstrv.okmovie.screens.detail.DetailFragment
 import com.vladbstrv.okmovie.screens.feed.adapters.FeedAdapter
 import com.vladbstrv.okmovie.screens.feed.adapters.GenresAdapter
@@ -107,7 +107,8 @@ class FeedFragment : Fragment() {
 
         viewModel.fetchMovieList((activity?.application as? OkMovieApp)?.movieApi)
         viewModel.movieLiveDataMovie.observe(viewLifecycleOwner, Observer {
-            adapter.setData(it.docs)
+//            adapter.setData(it.docs)
+            renderData(it)
         })
 
         viewModel.fetchMovieListNews((activity?.application as? OkMovieApp)?.movieApi)
@@ -125,6 +126,18 @@ class FeedFragment : Fragment() {
         mBinding.recyclerViewTopSerials.adapter = adapterSerials
         mBinding.recyclerViewGenres.adapter = adapterGenres
 
+    }
+
+    private fun renderData(appState: AppState) = with(mBinding) {
+        when (appState) {
+            is AppState.SuccessList -> {
+                loadingLayout.visibility = View.GONE
+                adapter.setData(appState.movieData.docs)
+            }
+            is AppState.Loading -> {
+                loadingLayout.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun loadDataSet() {

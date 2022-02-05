@@ -4,11 +4,10 @@ import android.app.Application
 import com.vladbstrv.okmovie.model.data.movie.MovieApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 
 class OkMovieApp: Application() {
@@ -17,11 +16,6 @@ class OkMovieApp: Application() {
 
     override fun onCreate() {
         super.onCreate()
-
-        startKoin {
-            androidContext(this@OkMovieApp)
-            modules(appModule)
-        }
 
         configureRetrofit()
     }
@@ -32,6 +26,9 @@ class OkMovieApp: Application() {
 
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .writeTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
             .build()
 
         val retrofit = Retrofit.Builder()
@@ -43,6 +40,8 @@ class OkMovieApp: Application() {
 
         movieApi = retrofit.create(MovieApi::class.java)
     }
+
+
 
 
 }

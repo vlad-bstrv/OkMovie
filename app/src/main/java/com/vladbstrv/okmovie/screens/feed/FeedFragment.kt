@@ -1,5 +1,6 @@
 package com.vladbstrv.okmovie.screens.feed
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,16 +10,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.vladbstrv.okmovie.OkMovieApp
 import com.vladbstrv.okmovie.R
 import com.vladbstrv.okmovie.databinding.FragmentFeedBinding
-import com.vladbstrv.okmovie.model.Movie
 import com.vladbstrv.okmovie.model.data.entities.rest_entities.Docs
-import com.vladbstrv.okmovie.screens.AppState
+import com.vladbstrv.okmovie.model.AppState
 import com.vladbstrv.okmovie.screens.detail.DetailFragment
 import com.vladbstrv.okmovie.screens.feed.adapters.FeedAdapter
 import com.vladbstrv.okmovie.screens.feed.adapters.GenresAdapter
+import com.vladbstrv.okmovie.screens.settings.DATA_SET_KEY
+import kotlinx.android.synthetic.main.fragment_feed.*
+
 
 class FeedFragment : Fragment() {
 
@@ -31,7 +33,9 @@ class FeedFragment : Fragment() {
     private lateinit var adapter: FeedAdapter
     private lateinit var adapterNews: FeedAdapter
     private lateinit var adapterSerials: FeedAdapter
+    private lateinit var adapterCartoon: FeedAdapter
     private lateinit var adapterGenres: GenresAdapter
+    private var isDataAdultSet: Boolean = true
 
 
     private val viewModel: FeedViewModel by viewModels()
@@ -47,6 +51,8 @@ class FeedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        loadDataSet()
 
         adapter = FeedAdapter(object : OnItemViewClickListener {
             override fun OnItemViewClick(movie: Docs) {
@@ -72,6 +78,27 @@ class FeedFragment : Fragment() {
                 )
             }
         })
+
+        if(isDataAdultSet) {
+            tvCartoons.visibility = View.VISIBLE
+            adapterCartoon = FeedAdapter(object : OnItemViewClickListener {
+                override fun OnItemViewClick(movie: Docs) {
+                    findNavController().navigate(
+                        R.id.action_feedFragment2_to_detailFragment,
+                        bundleOf(DetailFragment.movieKey to movie.id)
+                    )
+                }
+            })
+
+            viewModel.fetchMovieListCartoon((activity?.application as? OkMovieApp)?.movieApi)
+            viewModel.movieLiveDataMovieCartoon.observe(viewLifecycleOwner, Observer {
+                adapterCartoon.setData(it.docs)
+            })
+
+            mBinding.recyclerViewCartoon.adapter = adapterCartoon
+
+        }
+
         adapterGenres = GenresAdapter()
 
         viewModel.genre.observe(viewLifecycleOwner, Observer {
@@ -80,7 +107,8 @@ class FeedFragment : Fragment() {
 
         viewModel.fetchMovieList((activity?.application as? OkMovieApp)?.movieApi)
         viewModel.movieLiveDataMovie.observe(viewLifecycleOwner, Observer {
-            adapter.setData(it.docs)
+//            adapter.setData(it.docs)
+            renderData(it)
         })
 
         viewModel.fetchMovieListNews((activity?.application as? OkMovieApp)?.movieApi)
@@ -98,5 +126,25 @@ class FeedFragment : Fragment() {
         mBinding.recyclerViewTopSerials.adapter = adapterSerials
         mBinding.recyclerViewGenres.adapter = adapterGenres
 
+    }
+
+    private fun renderData(appState: AppState) = with(mBinding) {
+        when (appState) {
+            is AppState.SuccessList -> {
+                loadingLayout.visibility = View.GONE
+                adapter.setData(appState.movieData.docs)
+            }
+            is AppState.Loading -> {
+                loadingLayout.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun loadDataSet() {
+        activity?.let {
+            isDataAdultSet = activity
+                ?.getPreferences(Context.MODE_PRIVATE)
+                ?.getBoolean(DATA_SET_KEY, true) ?: true
+        }
     }
 }

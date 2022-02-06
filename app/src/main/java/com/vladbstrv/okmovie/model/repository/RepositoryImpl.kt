@@ -3,7 +3,7 @@ package com.vladbstrv.okmovie.model.repository
 import com.vladbstrv.okmovie.model.Movie
 import com.vladbstrv.okmovie.model.MovieLoader
 import com.vladbstrv.okmovie.model.MovieTrendsLoader
-import com.vladbstrv.okmovie.model.data.entities.rest_entities.Genres
+
 
 
 class RepositoryImpl : Repository {

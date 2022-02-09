@@ -19,9 +19,17 @@
     <fragment
         android:id="@+id/settingsFragment2"
         android:name="com.vladbstrv.okmovie.screens.settings.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment2_to_contentProviderFragment"
+            app:destination="@id/contentProviderFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.vladbstrv.okmovie.screens.detail.DetailFragment"
         android:label="DetailFragment" />
+    <fragment
+        android:id="@+id/contentProviderFragment"
+        android:name="com.vladbstrv.okmovie.screens.content_provider.ContentProviderFragment"
+        android:label="ContentProviderFragment" />
 </navigation>

@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.vladbstrv.okmovie.R
 import com.vladbstrv.okmovie.databinding.FragmentSettingsBinding
 
 const val DATA_SET_KEY = "datasetKey"
@@ -32,6 +34,9 @@ class SettingsFragment : Fragment() {
         loadDataSet()
         switchAdult.isChecked = isDataAdultSet
         switchAdult.setOnClickListener { changeAdultContent() }
+        btnContacts.setOnClickListener {
+            findNavController().navigate(R.id.action_settingsFragment2_to_contentProviderFragment)
+        }
     }
 
     private fun changeAdultContent() {

@@ -4,8 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.fragment.app.Fragment
-import com.vladbstrv.okmovie.screens.content_provider.ContentProviderFragment
+import com.vladbstrv.okmovie.screens.googlemaps.MapsFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,5 +13,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_screen_menu, menu)
+        return true
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.menu_maps -> {
+            supportFragmentManager.beginTransaction()
+                .addToBackStack("")
+                .replace(R.id.containerView, MapsFragment())
+                .commitAllowingStateLoss()
+            true
+        }
+
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
+    }
 }

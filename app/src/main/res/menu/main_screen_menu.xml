@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_threads"
-        android:title="@string/threads"
+        android:id="@+id/menu_maps"
+        android:title="@string/maps"
         app:showAsAction="always" />
 </menu>
